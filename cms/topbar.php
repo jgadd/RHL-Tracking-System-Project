@@ -8,7 +8,7 @@
       </li>
     <?php endif; ?>
       <li>
-        <a class="nav-link text-white"  href="./" role="button"><img src="assets/uploads/RHLogo.png" alt="Logo" height="40" width="70"> <large><b><?php echo "RHICORNESE HOLDINGS PACKAGE TRACKING" ?></b></large></a>
+        <a class="nav-link text-white"  href="./" role="button"><img src="assets/uploads/RHLogo.png" alt="Logo" height="20" width="30"> <large><b><?php echo "RHL E-TRACKING SYSTEM" ?></b></large></a>
       </li>
     </ul>
 

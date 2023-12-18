@@ -19,8 +19,8 @@
 					<tr>
 						<th class="text-center">#</th>
 						<th>Branch Code</th>
-						<th>Street/Building/Brgy.</th>
-						<th>City/State/Zip</th>
+						<th>Branch</th>
+						<th>Location</th>
 						<th>Country</th>
 						<th>Contact #</th>
 						<th>Action</th>

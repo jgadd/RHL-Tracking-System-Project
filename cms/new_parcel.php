@@ -40,10 +40,6 @@
                 <input type="text" name="recipient_address" id="" class="form-control form-control-sm" value="<?php echo isset($recipient_address) ? $recipient_address : '' ?>" required>
               </div>
               <div class="form-group">
-                <label for="" class="control-label">Destination</label>
-                <input type="text" name="destination" id="" class="form-control form-control-sm" value="<?php echo isset($destination) ? $destination : '' ?>" required>
-              </div>
-              <div class="form-group">
                 <label for="" class="control-label">Contact #</label>
                 <input type="text" name="recipient_contact" id="" class="form-control form-control-sm" value="<?php echo isset($recipient_contact) ? $recipient_contact : '' ?>" required>
               </div>
@@ -62,11 +58,11 @@
           <div class="col-md-6" id=""  <?php echo isset($type) && $type == 1 ? 'style="display: none"' : '' ?>>
             <?php if($_SESSION['login_branch_id'] <= 0): ?>
               <div class="form-group" id="fbi-field">
-                <label for="" class="control-label">Branch Processed</label>
+                <label for="" class="control-label">Branch Accepted Package</label>
               <select name="from_branch_id" id="from_branch_id" class="form-control select2" required="">
                 <option value=""></option>
                 <?php 
-                  $branches = $conn->query("SELECT *,concat(street,', ',city,', ',state,', ',zip_code,', ',country) as address FROM branches");
+                  $branches = $conn->query("SELECT *,concat(street) as address FROM branches");
                     while($row = $branches->fetch_assoc()):
                 ?>
                   <option value="<?php echo $row['id'] ?>" <?php echo isset($from_branch_id) && $from_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['branch_code']. ' | '.(ucwords($row['address'])) ?></option>
@@ -77,11 +73,11 @@
               <input type="hidden" name="from_branch_id" value="<?php echo $_SESSION['login_branch_id'] ?>">
             <?php endif; ?>  
             <div class="form-group" id="tbi-field">
-              <label for="" class="control-label">Recieving Branch</label>
+              <label for="" class="control-label">Branch To Pickup Package</label>
               <select name="to_branch_id" id="to_branch_id" class="form-control select2">
                 <option value=""></option>
                 <?php 
-                  $branches = $conn->query("SELECT *,concat(street,', ',city,', ',state,', ',zip_code,', ',country) as address FROM branches");
+                  $branches = $conn->query("SELECT *,concat(street) as address FROM branches");
                     while($row = $branches->fetch_assoc()):
                 ?>
                   <option value="<?php echo $row['id'] ?>" <?php echo isset($to_branch_id) && $to_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['branch_code']. ' | '.(ucwords($row['address'])) ?></option>

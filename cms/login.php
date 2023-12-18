@@ -29,7 +29,7 @@ header("location:index.php?page=home");
 
         echo '<img src="' . $logoPath . '" alt="' . $altText . '" style="max-width: 200px; height: auto;">';
         ?><br>
-        <b><?php echo "" ?> Package Tracking System </b>
+        <b><?php echo "" ?> RHL E-Tracking </b>
     </a>
 </div>
   <!-- /.login-logo -->

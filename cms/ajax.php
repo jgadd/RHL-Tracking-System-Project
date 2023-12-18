@@ -68,6 +68,17 @@ if($action == 'delete_carrier'){
 		echo $save;
 }
 
+if($action == 'save_checkpoint'){
+	$save = $crud->save_checkpoint();
+	if($save)
+		echo $save;
+}
+if($action == 'delete_checkpoint'){
+	$save = $crud->delete_checkpoint();
+	if($save)
+		echo $save;
+}
+
 if($action == 'save_parcel'){
 	$save = $crud->save_parcel();
 	if($save)

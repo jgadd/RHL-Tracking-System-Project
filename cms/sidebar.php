@@ -26,7 +26,7 @@
             <a href="#" class="nav-link nav-edit_branch">
               <i class="nav-icon fas fa-building"></i>
               <p>
-                CheckPoints
+                Branches
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -39,6 +39,29 @@
               </li>
               <li class="nav-item">
                 <a href="./index.php?page=branch_list" class="nav-link nav-branch_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_checkpoint">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+          Checkpoints
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=new_checkpoint" class="nav-link nav-new_checkpoint tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=checkpoint_list" class="nav-link nav-checkpoint_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>
@@ -91,6 +114,46 @@
               </li>
             </ul>
           </li>
+<!-- ////////////////////////////////// Package ////////////////////////////////////////////// -->
+
+
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_package">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Packages
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=new_package" class="nav-link nav-new_package tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=parcel_list" class="nav-link nav-parcel_list nav-sall tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>List All</p>
+                </a>
+              </li>
+              <?php 
+              $status_arr = array("Item Accepted </br>by Courier","Collected","Shipped","In-Transit","Arrived At Destination","Out for Delivery","Ready to Pickup","Delivered","Picked-Up","Unsuccessfull Delivery<br/>Attempt");
+              foreach($status_arr as $k =>$v):
+              ?>
+              <li class="nav-item">
+                <a href="./index.php?page=parcel_list&s=<?php echo $k ?>" class="nav-link nav-parcel_list_<?php echo $k ?> tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p><?php echo $v ?></p>
+                </a>
+              </li>
+            <?php endforeach; ?>
+            </ul>
+          </li>
+
+<!-- /////////////////////////////////////// -->
+
         <?php endif; ?>
           <li class="nav-item">
             <a href="#" class="nav-link nav-edit_parcel">

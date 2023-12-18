@@ -17,15 +17,15 @@
             <div class="row">
               <div class="col-sm-6 form-group ">
                 <label for="" class="control-label">Carrier</label>
-                <textarea name="street" id="" cols="30" rows="2" class="form-control"><?php echo isset($carrier) ? $carrier : '' ?></textarea>
+                <textarea name="carrier" id="" cols="30" rows="2" class="form-control"><?php echo isset($carrier) ? $carrier : '' ?></textarea>
               </div>
               <div class="col-sm-6 form-group ">
                 <label for="" class="control-label">Address</label>
-                <textarea name="city" id="" cols="30" rows="2" class="form-control"><?php echo isset($address) ? $address : '' ?></textarea>
+                <textarea name="address" id="" cols="30" rows="2" class="form-control"><?php echo isset($address) ? $address : '' ?></textarea>
               </div>
               <div class="col-sm-6 form-group ">
                 <label for="" class="control-label">Email</label>
-                <textarea name="contact" id="" cols="30" rows="2" class="form-control"><?php echo isset($email) ? $email : '' ?></textarea>
+                <textarea name="email" id="" cols="30" rows="2" class="form-control"><?php echo isset($email) ? $email : '' ?></textarea>
               </div>
           </div>
           </form>

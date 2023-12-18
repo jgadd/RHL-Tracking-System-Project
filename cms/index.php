@@ -122,10 +122,10 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="#">RHICORNESE HOLDINGS</a>.</strong>
+    <strong>Copyright &copy; 2023 <a href="#">RHICORNESE HOLDINGS GROUP</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b><?php echo "RHL Package Tracking System" ?></b>
+      <b><?php echo "RHL E-Tracking System" ?></b>
     </div>
   </footer>
 </div>
