@@ -2,21 +2,20 @@
     include 'db_connect.php';
 
    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Other form processing logic...
+    
     
         // Image upload and database storage
-        $image_path = 'photo';
+        $image_path = '';
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
             $target_dir = "images/"; // Change this to your desired upload directory
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
             move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
             $image_path = $target_file;
-    
+        
             // Save $image_path to your database column
             // Example: $image_path can be stored in the "image_column" of your database table
             // You need to modify this based on your database schema
-             $query = "UPDATE package SET photo = '$image_path' WHERE id = $id";
+            $query = "UPDATE package SET photo = '$image_path' WHERE id = $id";
              mysqli_query($conn, $query);
         }
     
@@ -26,7 +25,7 @@
     
 
 
-} ?>
+ ?>
 
 <style>
     textarea {
@@ -36,7 +35,7 @@
 
 <div class="row">
     <!-- First Column -->
-    <<div class="col-md-6 order-md-first">
+    <div class="col-md-6 ">
         <div class="card card-outline card-primary">
             <div class="card-body">
                 <form action="" id="manage-package">
@@ -45,43 +44,37 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="carrier" class="control-label">Carrier</label>
-                                <select name="carrier" id="carrier" class="form-control form-control-sm" required>
-                                    <?php
-                                    // Assume $conn is the database connection object
-                                    $query = "SELECT * FROM carrier"; // Change 'carriers' to your actual table name
-                                    $result = mysqli_query($conn, $query);
-
-                                    if ($result) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $carrierId = $row['id']; // Assuming you have a column named 'id'
-                                            $carrierName = $row['carrier']; // Assuming you have a column named 'carrier'
-                                            $selected = ($sender_carrier == $carrierId) ? 'selected' : '';
-
-                                            echo "<option value=\"$carrierId\" $selected>$carrierName</option>";
-                                        }
-
-                                        mysqli_free_result($result);
-                                    } else {
-                                        // Handle database query error
-                                        echo "Error: " . mysqli_error($conn);
-                                    }
-                                    ?>
-                                </select>
+                            <div class="col-md-6" id=""  <?php echo isset($type) && $type == 1 ? 'style="display: none"' : '' ?>>
+            <?php if($_SESSION['login_branch_id'] <= 0): ?>
+              <div class="form-group" id="fbi-field">
+                <label for="" class="control-label">Carrier</label>
+              <select name="from_package_id" id="from_package_id" class="form-control select2" required="">
+                <option value=""></option>
+                <?php 
+                  $packages = $conn->query("SELECT *,concat(carrier) as carrier FROM carrier");
+                    while($row = $packages->fetch_assoc()):
+                ?>
+                  <option value="<?php echo $row['id'] ?>" <?php echo isset($from_package_id) && $from_package_id == $row['id'] ? "selected":'' ?>><?php echo $row['']. ' | '.(ucwords($row['carrier'])) ?></option>
+                <?php endwhile; ?>
+              </select>
+            </div>
+            <?php else: ?>
+              <input type="hidden" name="from_package_id" value="<?php echo $_SESSION['login_package_id'] ?>">
+            <?php endif; ?>  
                             </div>
                             <div class="form-group">
                                 <label for="recipient" class="control-label">Recipient</label>
                                 <select name="recipient" id="recipient" class="form-control form-control-sm" required>
                                     <?php
                                     // Assume $conn is the database connection object
-                                    $query = "SELECT * FROM branches"; // Change 'carriers' to your actual table name
+                                    $query = "SELECT * FROM branches"; 
                                     $result = mysqli_query($conn, $query);
 
                                     if ($result) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $recipientId = $row['id']; // Assuming you have a column named 'id'
-                                            $recipientName = $row['street']; // Assuming you have a column named 'carrier'
-                                            $selected = ($sender_carrier == $carrierId) ? 'selected' : '';
+                                            $recipientId = $row['id']; 
+                                            $recipientName = $row['street']; 
+                                            $selected = ($sender_recipient == $recipientId) ? 'selected' : '';
 
                                             echo "<option value=\"$recipientId\" $selected>$recipientName</option>";
                                         }
@@ -100,13 +93,13 @@
                                 <select name="recipient" id="recipient" class="form-control form-control-sm" required>
                                     <?php
                                     // Assume $conn is the database connection object
-                                    $query = "SELECT * FROM branches"; // Change 'carriers' to your actual table name
+                                    $query = "SELECT * FROM branches"; 
                                     $result = mysqli_query($conn, $query);
 
                                     if ($result) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $senderId = $row['id']; // Assuming you have a column named 'id'
-                                            $senderName = $row['street']; // Assuming you have a column named 'carrier'
+                                            $senderId = $row['id']; 
+                                            $senderName = $row['street']; 
                                             $selected = ($sender_sender == $senderId) ? 'selected' : '';
 
                                             echo "<option value=\"$senderId\" $selected>$senderName</option>";
@@ -156,21 +149,23 @@
                                 <input type="file" name="image" id="image" class="form-control-file" onchange="displayImgCover(this)">
                                 <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 50%; margin-top: 10px;">
                             </div>
-                        </div>
-                    </div>
+                       
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- Second Column -->
-    <div class="col-md-6 order-md-first">
+  
+    <div class="form-group">
+            <label for="" class="control-label">Package Details</label>
+            <input type="text" name="description" id="" class="form-control form-control-sm" value="<?php echo isset($description) ? $description : '' ?>" required>
+        </div>
         <div class="form-group">
             <label for="" class="control-label">Current Location</label>
             <input type="text" name="location" id="" class="form-control form-control-sm" value="<?php echo isset($location) ? $location : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="" class="control-label">Quantity</label>
+
             <input type="text" name="quantity" id="" class="form-control form-control-sm" value="<?php echo isset($quantity) ? $quantity : '' ?>" required>
         </div>
         <div class="form-group">
@@ -190,10 +185,10 @@
             <input type="text" name="llg" id="" class="form-control form-control-sm" value="<?php echo isset($llg) ? $llg : '' ?>" required>
         </div>
     </div>
-</div>
 
-    </div>
-</div>
+
+
+                                
 
         <!-- Save Row -->
         <div class="card-footer border-top border-info">
@@ -208,13 +203,6 @@
 <script>
   
 	$('#manage-package').submit(function(e){
-		e.preventDefault()
-		start_load()
-    if($('#parcel-items tbody tr').length <= 0){
-      alert_toast("Please add atleast 1 parcel information.","error")
-      end_load()
-      return false;
-    }
 		$.ajax({
 			url:'ajax.php?action=save_package',
 			data: new FormData($(this)[0]),

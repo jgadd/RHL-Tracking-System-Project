@@ -341,7 +341,47 @@ Class Action {
 			return 1;
 		}
 	}
-	
+	// Save package start
+	function save_package(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k => $v){
+			if(!in_array($k, array('id')) && !is_numeric($k)){
+				if(empty($data)){
+					$data .= " $k='$v' ";
+				}else{
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		if(empty($id)){
+			$chars = '0123456789';
+			$i = 0;
+			while($i == 0){
+				$pcode = substr(str_shuffle($chars), 0, 15);
+				$chk = $this->db->query("SELECT * FROM package where tracking_number = '$pcode'")->num_rows;
+				if($chk <= 0){
+					$i = 1;
+				}
+			}
+			$data .= ", tracking_number='$pcode' ";
+			$save = $this->db->query("INSERT INTO package set $data");
+		}else{
+			$save = $this->db->query("UPDATE package set $data where id = $id");
+		}
+		if($save){
+			return 1;
+		}
+	}
+	function delete_package(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM package where id = $id");
+		if($delete){
+			return 1;
+		}
+	}
+
+	// Save package end
 	function save_parcel(){
 		extract($_POST);
 		foreach($price as $k => $v){

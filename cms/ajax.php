@@ -78,6 +78,22 @@ if($action == 'delete_checkpoint'){
 	if($save)
 		echo $save;
 }
+if($action == 'save_package'){
+	$save = $crud->save_package();
+	if($save)
+		echo $save;
+}
+if($action == 'delete_package'){
+	$save = $crud->delete_package();
+	if($save)
+		echo $save;
+}
+if($action == 'update_package'){
+	$save = $crud->update_package();
+	if($save)
+		echo $save;
+}
+
 
 if($action == 'save_parcel'){
 	$save = $crud->save_parcel();

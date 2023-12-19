@@ -22,7 +22,6 @@
 						<th>Sender</th>
 						<th>Reciever</th>
 						<th>Status</th>
-						<th>Current Location</th>
 						<th>Action</th>
 					</tr>
 				</thead>
